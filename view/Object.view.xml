@@ -1,0 +1,224 @@
+<mvc:View controllerName="msg.controller.Object" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar">
+	<semantic:FullscreenPage id="page" navButtonPress="onNavBack" showNavButton="true" title="{i18n>objectTitle}" busy="{objectView>/busy}"
+		busyIndicatorDelay="{objectView>/delay}" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:u="sap.uxap"
+		xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:semantic="sap.m.semantic" xmlns:core="sap.ui.core">
+		<semantic:customHeaderContent>
+			<Button xmlns="sap.m" tooltip="Save Submission" icon="sap-icon://save" text="save" type="Accept" press="save"/>
+			<Button xmlns="sap.m" tooltip="Delete Submission" icon="sap-icon://delete" text="Delete" type="Reject" press="onDelete"/>
+			<Button xmlns="sap.m" tooltip="Cancel Submission" icon="sap-icon://cancel" text="Cancel" type="Emphasized" press="onNavBack"/>
+		</semantic:customHeaderContent>
+		<semantic:content>
+			<u:ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="true" showAnchorBarPopover="true">
+				<u:headerContent objectImageShape="Circle" objectImageURI="./image/msg.jpg">
+					<l:VerticalLayout width="80%">
+						<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+							adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+							singleContainerFullSize="false">
+							<Label xmlns="sap.m" text="Submission Number "/>
+							<Input xmlns="sap.m" id="sno" value="{ZsubmissionNum}" editable="false" width="20%"/>
+							<Label xmlns="sap.m" text=" Submission Text"/>
+							<Input xmlns="sap.m" value="{ZsubmissionText}" width="96%" id="stext"/>
+							<Label xmlns="sap.m" text="Submission Date"/>
+							<DatePicker id="subdata" xmlns="sap.m" valueFormat="yyyyMMdd" value="{ZofferRecDt}" width="40%"/>
+							<Label xmlns="sap.m" text="Status"/>
+							<Select xmlns="sap.m" change="onChange" selectedKey="{ZsubStatusTxt}" id="status" width="20%">
+								<items id="status1">
+									<core:Item text="Created" key="Created"/>
+									<core:Item text="In Process" key="In Process"/>
+									<core:Item text="Completed" key="Completed"/>
+								</items>
+							</Select>
+						</f:SimpleForm>
+					</l:VerticalLayout>
+				</u:headerContent>
+				<u:sections>
+					<u:ObjectPageSection title="Section 1" showTitle="true">
+						<u:subSections>
+							<u:ObjectPageSubSection title="Customer Information">
+								<u:blocks>
+									<VBox xmlns="sap.m" class="sapUiSmallMargin">
+										<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+											adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+											singleContainerFullSize="false" ariaLabelledBy="Title1">
+											<f:content>
+												<Toolbar>
+													<Title text="Busines Partner" level="H5" titleStyle="H5"/>
+												</Toolbar>
+												<Label text="Cedent Name"/>
+												<Input value="{Zcedent}-{ZcedentTxt}" showSuggestion="true" showValueHelp="true" placeholder="press F4..." textFormatMode="KeyValue" valueHelpRequest="onF4help"
+													id="cedent1" suggestionItems="{/CedentSet}" suggestionItemSelected="suggestionItemSelected">
+													<suggestionItems>
+														<core:ListItem key="{Partner}" text="{McName1}" additionalText="{Partner}"/>
+													</suggestionItems>
+												</Input>
+												<Label text="Broker Name"/>
+												<Input value="{Zbroker}-{ZbrokerTxt}" showValueHelp="true" placeholder="press F4..." textFormatMode="KeyValue" suggestionItems="{/BrokerSHSet}" valueHelpRequest="onF4bro"
+													id="Broker1">
+													<suggestionItems>
+														<core:ListItem key="{Partner}" text="{McName1}" additionalText="{Partner}"/>
+													</suggestionItems>
+												</Input>
+											</f:content>
+										</f:SimpleForm>
+									</VBox>
+								</u:blocks>
+							</u:ObjectPageSubSection>
+						</u:subSections>
+					</u:ObjectPageSection>
+					<u:ObjectPageSection title="{i18n>title}" showTitle="true">
+						<u:subSections>
+							<u:ObjectPageSubSection title="Contract Information">
+								<u:blocks>
+									<VBox class="sapUiSmallMargin">
+										<f:SimpleForm id="SimpleFormToolbar" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4"
+											labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="2" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+											singleContainerFullSize="true">
+											<f:content>
+												<Label text="Contract Type"/>
+												<Input value="{ZconTypeDescr}" editable="false" width="20%"/>
+												<Label text="Start Date"/>
+												<DatePicker value="{ZcreatedDate}" id="datec" valueFormat="yyyyMMdd" width="30%"/>
+												<Label text="End Date"/>
+												<DatePicker valueFormat="yyyy-MM-dd" value="20200101" width="30%" id="datee"/>
+												<Label text="Treaty Nature"/>
+												<Select id="product" selectedKey="{Country}" width="30%">
+													<items>
+														<core:Item text="Quota" key="p1"/>
+														<core:Item text="Surplus" key="p2"/>
+													</items>
+												</Select>
+												<Label text="Treat Number"/>
+												<Input type="Number" value="{ZtreatyNm}" id="ttno" width="20%"/>
+											</f:content>
+										</f:SimpleForm>
+									</VBox>
+								</u:blocks>
+							</u:ObjectPageSubSection>
+						</u:subSections>
+					</u:ObjectPageSection>
+					<u:ObjectPageSection title="{i18n>title}" showTitle="true">
+						<u:subSections>
+							<u:ObjectPageSubSection title="Accounting Details">
+								<u:blocks>
+									<f:SimpleForm id="SimpleFormToolbar3" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4"
+										labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="2" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+										singleContainerFullSize="true">
+										<f:content>
+											<Label xmlns="sap.m" text="Accounting frequency"/>
+											<Input xmlns="sap.m" value="Yearly" editable="false" width="30%"/>
+											<Label xmlns="sap.m" text="Account CreationPeriod"/>
+											<DatePicker xmlns="sap.m" valueFormat="yyyy-MM-dd" value="20000101" width="30%"/>
+											<Label xmlns="sap.m" text="Account Level"/>
+											<Input xmlns="sap.m" value="Share" editable="false" width="10%"/>
+											<Label xmlns="sap.m" text="End of Accounting year"/>
+											<DatePicker xmlns="sap.m" valueFormat="yyyy-MM-dd" value="20000101" width="30%"/>
+											<Label xmlns="sap.m" text="First Accounting Key date"/>
+											<Input xmlns="sap.m" value="03.06" editable="false" width="20%"/>
+										</f:content>
+									</f:SimpleForm>
+								</u:blocks>
+							</u:ObjectPageSubSection>
+						</u:subSections>
+					</u:ObjectPageSection>
+					<u:ObjectPageSection title="Section" showTitle="true">
+						<u:subSections>
+							<u:ObjectPageSubSection title="Section">
+								<u:blocks>
+									<VBox class="sapUiSmallMargin">
+										<Table id="__table2" growing="true" mode="SingleSelectLeft" growingThreshold="5" growingScrollToLoad="true"
+											noDataText="No Sectional Details" items="{path:'SubToSectionNav'}">
+											<headerToolbar>
+												<Toolbar>
+													<Title text="Section Details" level="H2"/>
+													<ToolbarSpacer/>
+													<Button tooltip="Add Section" icon="sap-icon://add" press="save_section"/>
+													<Button tooltip="Delete Section" icon="sap-icon://delete" press="delete_section"/>
+												</Toolbar>
+											</headerToolbar>
+											<items>
+												<ColumnListItem id="__item0">
+													<cells>
+														<Text text="{ZtreatyType}" id="text11"/>
+														<Text text="{Zcob}-{Zcob_txt}" id="text22"/>
+														<Text text="{Zarea}-{Zarea_txt}" id="text44"/>
+														<Text text="{Zgartnr}-{Zgartnr_txt}" id="text33"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+											<columns>
+												<Column id="__column11">
+													<header>
+														<Label text="Treaty Type" id="__label111"/>
+													</header>
+												</Column>
+												<Column id="__column21">
+													<header>
+														<Label text="COB" id="__label212"/>
+													</header>
+												</Column>
+												<Column id="__column41">
+													<header>
+														<Label text="Area" id="__labe4121"/>
+													</header>
+												</Column>
+											  	<Column id="__column31">
+													<header>
+														<Label text="Business Type" id="__label312"/>
+													</header>
+												</Column>
+											</columns>
+										</Table>
+									</VBox>
+								</u:blocks>
+							</u:ObjectPageSubSection>
+						</u:subSections>
+					</u:ObjectPageSection>
+					<u:ObjectPageSection title="Section 1" showTitle="true">
+						<u:subSections/>
+					</u:ObjectPageSection>
+					<u:ObjectPageSection title="Section" showTitle="true">
+						<u:subSections>
+							<u:ObjectPageSubSection title="Additional Information">
+								<u:blocks>
+									<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+										adjustLabelSpan="false" emptySpanXL="0" emptySpanL="2" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+										singleContainerFullSize="true">
+										<f:content>
+											<Label xmlns="sap.m" text="RDC"/>
+											<Input xmlns="sap.m" type="Number" value="15"/>
+											<Label xmlns="sap.m" text="RIC"/>
+											<Input xmlns="sap.m" type="Number" value="12"/>
+											<!--<Label xmlns="sap.m" text=" Ri Commission(%) "/>-->
+											<!--<Input xmlns="sap.m" type="Number" value="Area"/>-->
+											<!--<Label xmlns="sap.m" text="Brokerage(%)"/>-->
+											<!--<Input xmlns="sap.m" type="Number" value="Area"/>-->
+										</f:content>
+									</f:SimpleForm>
+								</u:blocks>
+							</u:ObjectPageSubSection>
+						</u:subSections>
+					</u:ObjectPageSection>
+					<u:ObjectPageSection title="Section" showTitle="true">
+						<u:subSections>
+							<u:ObjectPageSubSection title="Remarks">
+								<u:blocks>
+									<FeedInput icon="sap-icon://comment" placeholder="Enter Remarks..." post="onPost" showIcon="true"/>
+								</u:blocks>
+							</u:ObjectPageSubSection>
+						</u:subSections>
+					</u:ObjectPageSection>
+				</u:sections>
+			</u:ObjectPageLayout>
+		</semantic:content>
+		<semantic:messagesIndicator>
+			<semantic:MessagesIndicator press="onMessagePopoverPress" visible="{=${message>/}.length > 0}"/>
+		</semantic:messagesIndicator>
+		<semantic:positiveAction>
+			<semantic:PositiveAction text="Create Treaty" press="createtreaty1"/>
+		</semantic:positiveAction>
+		<semantic:negativeAction>
+			<semantic:NegativeAction text="Reject Treaty" press="onShareEmailPress"/>
+		</semantic:negativeAction>
+	</semantic:FullscreenPage>
+</mvc:View>
