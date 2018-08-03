@@ -1,0 +1,52 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	<Dialog width="70%" title="Choose the section details" contentWidth="550px" contentHeight="600px">
+		<content>
+			<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+				singleContainerFullSize="false" ariaLabelledBy="Title1">
+				<f:content>
+					<Label text="Treaty type"/>
+					<Input value="Quota"/>
+					<Label text="Class of Business"/>
+					<Input showValueHelp="true" placeholder="press F4..." textFormatMode="KeyValue" valueHelpRequest="onF4cob"
+						suggestionItemSelected="suggestionItemSelected" suggestionItems="{/ZshCobSatSet}" id="cob1">
+						<suggestionItems>
+							<core:ListItem key="{Brchnr}" text="{Brchbez}" additionalText="{Brchnr}"/>
+						</suggestionItems>
+					</Input>
+					<Label text="Area"/>
+					<Input id="area1" placeholder="press F4..." showValueHelp="true" valueHelpRequest="onF4area" suggestionItems="{/ZshAreaSatSet}"
+						textFormatMode="KeyValue">
+						<suggestionItems>
+							<core:ListItem key="{NodeKbez}" text="{Nodebez}" additionalText="{NodeKbez}"/>
+						</suggestionItems>
+					</Input>
+					<Label text="Business Type"/>
+					<Input id="btype" showValueHelp="true" placeholder="press F4..." textFormatMode="KeyValue" valueHelpRequest="onF4btype"
+						suggestionItems="{/ZshBusSatSet}">
+						<suggestionItems>
+							<core:ListItem key="{GartnrKbez}" text="{Gartbez}" additionalText="{GartnrKbez}"/>
+						</suggestionItems>
+					</Input>
+					<Label text="Currency"/>
+					<Select id="curr" selectedKey="{Zcurrency}">
+						<items>
+							<core:Item text="INR" key="INR"/>
+							<core:Item text="USD" key="USD"/>
+						</items>
+					</Select>
+					<Label xmlns="sap.m" text="Quota Share"/>
+					<Input xmlns="sap.m" type="Number" value="15"/>
+					<Label xmlns="sap.m" text="Underwriter Limit"/>
+					<Input xmlns="sap.m" type="Number" value="12"/>
+					<Label xmlns="sap.m" text=" Ri Commission(%) "/>
+					<Input xmlns="sap.m" type="Number" value="Area"/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<buttons>
+			<Button text="Save" type="Accept" press="save_sec"></Button>
+			<Button text="Close" type="Reject" press="close_sec"></Button>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,171 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:u="sap.uxap" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:semantic="sap.m.semantic" controllerName="msg.controller.new">
+	<semantic:FullscreenPage id="page" showNavButton="true" navButtonPress="onNavBack" title="{i18n>objectTitle}">
+		<semantic:customHeaderContent>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button tooltip="Save" icon="sap-icon://save" text="Save" type="Accept" press="save1"/>
+				<Button tooltip="Cancel" icon="sap-icon://sys-cancel-2" text="Cancel" press="Back" type="Reject"/>
+			</Toolbar>
+		</semantic:customHeaderContent>
+		<semantic:content>
+			<u:ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="ture" showAnchorBarPopover="true">
+				<u:headerContent>
+					<l:VerticalLayout width="80%">
+						<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false">
+							<Label text="Submission Number "/>
+							<Input id="sno" editable="false"/>
+							<Label text=" Submission Text"/>
+							<Input id="subtext" placeholder="Enter the description......." editable="true"/>
+							<Label text="Submission Date"/>
+							<DatePicker id="datepic" valueFormat="yyyyMMdd" value="20180101" width="20%"/>
+							<Label text="Status"/>
+							<Select id="status" width="20%">
+								<items>
+									<core:Item text="Created" key="Created"/>
+									<core:Item text="In Process" key="In Process"/>
+									<core:Item text="Compleated" key="Compleated"/>
+								</items>
+							</Select>
+						</f:SimpleForm>
+					</l:VerticalLayout>
+				</u:headerContent>
+				<u:sections>
+					<u:ObjectPageSection title="Section 1" showTitle="true">
+						<u:subSections>
+							<u:ObjectPageSubSection title="Customer Information">
+								<u:blocks>
+									<VBox class="sapUiSmallMargin">
+										<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false" ariaLabelledBy="Title1">
+											<f:content>
+												<Toolbar>
+													<Title text="Busines Partner" level="H5" titleStyle="H5"/>
+												</Toolbar>
+												<Label text="CedentName"/>
+												<Input showSuggestion="true" showValueHelp="true" placeholder="press F4..." textFormatMode="KeyValue" valueHelpRequest="onF4help" id="cedent" suggestionItems="{/CedentSet}" suggestionItemSelected="suggestionItemSelected" valueLiveUpdate="true">
+													<suggestionItems>
+														<core:ListItem key="{Partner}" text="{McName1}" additionalText="{Partner}"/>
+													</suggestionItems>
+												</Input>
+												<Label text="BrokerName"/>
+												<Input showValueHelp="true" placeholder="press F4..." textFormatMode="KeyValue" suggestionItems="{/BrokerSHSet}" valueHelpRequest="onF4bro" id="Broker" valueLiveUpdate="true">
+													<suggestionItems>
+														<core:ListItem key="{Partner}" text="{McName1}" additionalText="{Partner}"/>
+													</suggestionItems>
+												</Input>
+											</f:content>
+										</f:SimpleForm>
+									</VBox>
+								</u:blocks>
+							</u:ObjectPageSubSection>
+						</u:subSections>
+					</u:ObjectPageSection>
+					<u:ObjectPageSection title="{i18n>title}" showTitle="true">
+						<u:subSections>
+							<u:ObjectPageSubSection title="Contract Information">
+								<u:blocks>
+									<VBox class="sapUiSmallMargin">
+										<f:SimpleForm id="SimpleFormToolbar" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="2" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="true">
+											<f:content>
+												<Label text="Contract Type"/>
+												<Input value="Quota" editable="false" width="20%"/>
+												<Label text="Start Date"/>
+												<DatePicker id="stdate" valueFormat="yyyyMMdd" value="20000101" width="30%"/>
+												<Label text="End Date"/>
+												<DatePicker valueFormat="yyyyMMdd" value="20200101" width="30%"/>
+												<Label text="Treat Nature"/>
+												<Select id="product" width="30%">
+													<items>
+														<core:Item text="Quota" key="p1"/>
+														<core:Item text="Surplus" key="p2"/>
+													</items>
+												</Select>
+												<Label text="Treaty NO"/>
+												<Input Change="renew" submit="renew" change="renew"/>
+											</f:content>
+										</f:SimpleForm>
+									</VBox>
+								</u:blocks>
+							</u:ObjectPageSubSection>
+						</u:subSections>
+					</u:ObjectPageSection>
+					<u:ObjectPageSection title="Section" showTitle="true">
+						<u:subSections>
+							<u:ObjectPageSubSection title="{Section}">
+								<u:blocks>
+									<VBox class="sapUiSmallMargin">
+										<Table id="__table2" growing="true" mode="SingleSelectLeft" growingThreshold="5" growingScrollToLoad="true" noDataText="No Sectional Details" items="{path:'model1>/ins_table'}">
+											<headerToolbar>
+												<Toolbar>
+													<Title text="Section Details" level="H2"/>
+													<ToolbarSpacer/>
+													<Button tooltip="Add Section" icon="sap-icon://add" press="save_section"/>
+													<Button tooltip="Delete Section" icon="sap-icon://delete" press="delete_section"/>
+												</Toolbar>
+											</headerToolbar>
+											<items>
+												<ColumnListItem id="__item0">
+													<cells>
+														<Text text="{model1>ZtreatyType}" id="text1"/>
+														<Text text="{model1>Zcob}" id="text2"/>
+														<Text text="{model1>Zarea}" id="text4"/>
+                                                        <Text text="{model1>ZbusType}" id="text3"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+											<columns>
+												<Column id="__column11">
+													<header>
+														<Label text="Treaty Type" id="__label11"/>
+													</header>
+												</Column>
+												<Column id="__column21">
+													<header>
+														<Label text="COB" id="__label21"/>
+													</header>
+												</Column>
+												<Column id="__column41">
+													<header>
+														<Label text="Area" id="__labe41"/>
+													</header>
+												</Column>
+												<Column id="__column31">
+													<header>
+														<Label text="BusinessType" id="__label31"/>
+													</header>
+												</Column>
+											</columns>
+										</Table>
+									</VBox>
+								</u:blocks>
+							</u:ObjectPageSubSection>
+						</u:subSections>
+					</u:ObjectPageSection>
+					<!--<u:ObjectPageSection title="Section" showTitle="true">-->
+					<!--	<u:subSections>-->
+					<!--		<u:ObjectPageSubSection title="Additional Information">-->
+					<!--			<u:blocks>-->
+					<!--				<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12"-->
+					<!--					adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"-->
+					<!--					singleContainerFullSize="false" ariaLabelledBy="Title1">-->
+					<!--					<f:content>-->
+					<!--						<Label text="Quota Share"/>-->
+					<!--						<Input type="Number" value="15"/>-->
+					<!--						<Label text="Underwriter Limit"/>-->
+					<!--						<Input type="Number" value="12"/>-->
+					<!--						<Label text=" Ri Commision "/>-->
+					<!--						<Input type="Number" value="Area"/>-->
+					<!--						<Label text="Brokerage"/>-->
+					<!--						<Input type="Number" value="Area"/>-->
+					<!--						<Label text="Signed Line"/>-->
+					<!--						<Input/>-->
+					<!--					</f:content>-->
+					<!--				</f:SimpleForm>-->
+					<!--			</u:blocks>-->
+					<!--		</u:ObjectPageSubSection>-->
+					<!--	</u:subSections>-->
+					<!--</u:ObjectPageSection>-->
+				</u:sections>
+			</u:ObjectPageLayout>
+		</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>

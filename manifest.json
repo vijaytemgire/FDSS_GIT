@@ -1,0 +1,180 @@
+{
+    "_version": "1.4.0",
+    "sap.app": {
+        "id": "msg",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZFDSS5_SAT_SRV_01/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            }
+        },
+        "sourceTemplate": {
+            "id": "sap.ui.ui5-template-plugin.1worklist",
+            "version": "1.38.3"
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "sap-icon://task",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "supportedThemes": [
+            "sap_hcb",
+            "sap_bluecrystal",
+            "sap_belize",
+            "sap_belize_plus"
+        ]
+    },
+    "sap.ui5": {
+        "rootView": {
+            "viewName": "msg.view.App",
+            "type": "XML",
+            "id": "app"
+        },
+        "dependencies": {
+            "minUI5Version": "1.38.0",
+            "libs": {
+                "sap.ui.core": {
+                    "minVersion": "1.38.0"
+                },
+                "sap.m": {
+                    "minVersion": "1.38.0"
+                },
+                "sap.ushell": {
+                    "minVersion": "1.38.0"
+                },
+                "sap.collaboration": {
+                    "minVersion": "1.38",
+                    "lazy": true
+                }
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "msg.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultOperationMode": "Auto",
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "None"
+                }
+            },
+            "model1": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "preload": true,
+                "uri": "model/ins_person.json"
+            },
+            "message": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "preload": true,
+                "uri": "model/messagepopover.json"
+            }
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "msg.view",
+                "controlId": "app",
+                "controlAggregation": "pages",
+                "bypassed": {
+                    "target": [
+                        "notFound"
+                    ]
+                },
+                "async": true
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "worklist",
+                    "target": [
+                        "worklist"
+                    ]
+                },
+                {
+                    "pattern": "ObjectView/{objectId}",
+                    "name": "object",
+                    "target": [
+                        "object"
+                    ]
+                },
+                {
+                    "name": "new",
+                    "pattern": "new/{subno}",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": [
+                        "new"
+                    ]
+                }
+            ],
+            "targets": {
+                "worklist": {
+                    "viewName": "Worklist",
+                    "viewId": "worklist",
+                    "viewLevel": 1
+                },
+                "object": {
+                    "viewName": "Object",
+                    "viewId": "object",
+                    "viewLevel": 2
+                },
+                "objectNotFound": {
+                    "viewName": "ObjectNotFound",
+                    "viewId": "objectNotFound",
+                    "viewLevel": 1
+                },
+                "notFound": {
+                    "viewName": "NotFound",
+                    "viewId": "notFound"
+                },
+                "new": {
+                    "viewType": "XML",
+                    "transition": "",
+                    "clearAggregation": "",
+                    "viewName": "new",
+                    "viewLevel": 1,
+                    "controlId": "app"
+                }
+            }
+        }
+    },
+    "sap.platform.abap": {
+        "uri": "/sap/bc/ui5_ui5/sap/zfdss",
+        "_version": "1.1.0"
+    }
+}

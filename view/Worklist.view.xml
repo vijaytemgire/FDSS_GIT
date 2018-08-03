@@ -1,0 +1,87 @@
+<mvc:View controllerName="msg.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar">
+	<semantic:FullscreenPage id="page">
+		<semantic:content>
+			<!--<IconTabBar stretchContentHeight="true" applyContentPadding="false" enableTabReordering="ture" backgroundDesign="Solid">-->
+			<!--	<items>-->
+			<!--		<IconTabFilter iconColor="Critical" text="Non-Life" design="Horizontal" icon="sap-icon://insurance-car" key="Non-Life">-->
+			<!--			<ScrollContainer height="100%" width="100%" horizontal="false" vertical="true">-->
+							<Table  mode="Delete" delete="onDelete" id="table" width="auto" class="sapUiResponsiveMargin"
+								items="{ path: '/SubmissionSet', sorter: { path: 'ZsubmissionText', descending: false } }" noDataText="{worklistView>/tableNoDataText}"
+								busyIndicatorDelay="{worklistView>/tableBusyDelay}"  updateFinished="onUpdateFinished">
+								<!--<headerToolbar>-->
+								<!--	<Toolbar>-->
+								<!--		<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>-->
+								<!--		<ToolbarSpacer/>-->
+								<!--		<SearchField id="searchField1" tooltip="{i18n>worklistSearchTooltip}" search="onSearch" width="auto"></SearchField>-->
+								<!--	</Toolbar>-->
+								<!--</headerToolbar>-->
+								<headerToolbar design="Solid">
+									<Toolbar >
+										<Title id="tableHeader" text="Submission Records" width= "56%" textAlign="Right"/>
+										<ToolbarSpacer/>
+										<OverflowToolbarButton type="Emphasized" icon="sap-icon://add-document" tooltip="Add New Submission" text="new" press="newEntry"/>
+										<SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" liveChange="onSearch2" width="auto"></SearchField>
+									</Toolbar>
+								</headerToolbar>
+								<columns>
+									<Column id="sno">
+										<Text text="{i18n>subno}" id="subno"/>
+									</Column>
+									<Column id="stext" hAlign="Right">
+										<Text text="{i18n>subtext}" id="subtext"/>
+									</Column>
+									<!--<Column id="ctype" hAlign="Right">-->
+									<!--	<Text text="{i18n>contrtype}" id="contrtype"/>-->
+									<!--</Column>-->
+									<Column id="cednt" hAlign="Right">
+										<Text text="{i18n>cedent}" id="cedent"/>
+									</Column>
+										<Column id="cednttxt" hAlign="Right">
+										<Text text="{i18n>cedenttxt}" id="cedenttxt"/>
+									</Column>
+									<Column id="stat" hAlign="Right">
+										<Text text="{i18n>status}" id="status"/>
+									</Column>
+									<!--<Column id="cur" hAlign="Right">-->
+									<!--	<Text text="{i18n>currency}" id="currency"/>-->
+									<!--</Column>-->
+									<Column id="creatby" hAlign="Right">
+										<Text text="{i18n>createdby}" id="createdby"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem type="Navigation" press="onPress" highlight="{path:'ZsubStatusTxt', formatter:'.RowHighlight'}">
+										<cells>
+											<ObjectIdentifier title="{ZsubmissionNum}"/>
+											<Text text="{ZsubmissionText}"/>
+											<Text text="{Zcedent}"/>
+											<Text text="{ZcedentTxt}"/>
+											<Text text="{ZsubStatusTxt}"/>
+											<!--<Text text="{Zcurrency}"/>-->
+											<Text text="{ZcreatedBy}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						<!--</ScrollContainer>-->
+					<!--</IconTabFilter>-->
+					<!--<IconTabSeparator/>-->
+					<!--<IconTabFilter text="Life" design="Horizontal" icon="sap-icon://insurance-life" key="Life"></IconTabFilter>-->
+				<!--</items>-->
+			<!--</IconTabBar>-->
+		</semantic:content>
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+		<!--<semantic:shareInJamAction>-->
+		<!--	<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>-->
+		<!--</semantic:shareInJamAction>-->
+		<!--<semantic:saveAsTileAction>-->
+		<!--	<footerbar:AddBookmarkButton id="shareTile" title="{worklistView>/saveAsTileTitle}"/>-->
+		<!--</semantic:saveAsTileAction>-->
+		<semantic:negativeAction>
+			<semantic:NegativeAction text="Exit Application" press="onNavBack"/>
+		</semantic:negativeAction>
+	</semantic:FullscreenPage>
+</mvc:View>
